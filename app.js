@@ -1,5 +1,6 @@
 'use strict';
 
+
 // app.js
 const express = require('express');
 const path = require('path');
@@ -14,8 +15,10 @@ const userInViews = require('./lib/middleware/userInViews');
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const PORT = process.env.PORT;
 
 dotenv.config();
+
 
 
 
@@ -137,6 +140,10 @@ app.use(function (err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+app.listen(process.env.PORT, () => {
+  console.log('Web Server up on port', PORT);
 });
 
 module.exports = app;
