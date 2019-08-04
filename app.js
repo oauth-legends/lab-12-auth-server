@@ -1,7 +1,5 @@
 'use strict';
 
-
-// app.js
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -18,9 +16,6 @@ const usersRouter = require('./routes/users');
 const PORT = process.env.PORT;
 
 dotenv.config();
-
-
-
 
 // Configure Passport to use Auth0
 let strategy = new Auth0Strategy(
@@ -39,9 +34,7 @@ let strategy = new Auth0Strategy(
   }
 );
 
-
 passport.use(strategy);
-
 
 // You can use this section to keep a smaller payload
 passport.serializeUser(function (user, done) {
@@ -55,18 +48,9 @@ passport.deserializeUser(function (user, done) {
 const app = express();
 
 
-// 3rd Party Resources
-
-// const cors = require('cors');
-
-
-// Prepare the express app
-
-
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 app.use(logger('dev'));
 app.use(cookieParser());
 
@@ -78,22 +62,15 @@ let sess = {
   saveUninitialized: true
 };
 
-
 if (app.get('env') === 'production') {
   sess.cookie.secure = true; // serve secure cookies, requires https
 }
 
 app.use(session(sess));
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 app.use(flash());
-
-
 app.use(function (req, res, next) {
   if (req && req.query && req.query.error) {
     req.flash('error', req.query.error);
@@ -109,16 +86,12 @@ app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/', usersRouter);
 
-
-
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-// Error handlers
 
 // Development error handler
 // Will print stacktrace
@@ -147,20 +120,3 @@ app.listen(process.env.PORT, () => {
 });
 
 module.exports = app;
-
-
-
-// module.exports = {
-//   server: app,
-//   start: (port) => {
-//     if( ! isRunning ) {
-//       app.listen(port, () => {
-//         isRunning = true;
-//         console.log(`Server Up on ${port}`);
-//       });
-//     }
-//     else {
-//       console.log('Server is already running');
-//     }
-//   },
-// };

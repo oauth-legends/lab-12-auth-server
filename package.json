@@ -34,9 +34,12 @@
     "passport-auth0": "^1.2.0",
     "path": "^0.12.7",
     "pug": "^2.0.4",
+    "querystring": "^0.2.0",
     "require-directory": "^2.1.1",
     "supertest": "^3.4.2",
-    "swagger-ui-express": "^4.0.7"
+    "swagger-ui-express": "^4.0.7",
+    "url": "^0.11.0",
+    "util": "^0.12.1"
   },
   "description": "### Authors: Jonny, Gurinder, and Aileen",
   "repository": {
