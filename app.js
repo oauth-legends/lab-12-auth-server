@@ -24,7 +24,7 @@ let strategy = new Auth0Strategy(
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:
-      process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/oath'
+      process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/oauth'
   },
   function (accessToken, refreshToken, extraParams, profile, done) {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
